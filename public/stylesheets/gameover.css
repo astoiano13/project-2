@@ -11,7 +11,7 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-image: url(/images/flamesgif.gif);
+    background-image: url(../images/flamesgif.gif);
     background-repeat: no-repeat;
     background-size: 100%;
 }
