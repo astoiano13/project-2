@@ -163,13 +163,33 @@ const textNodes = [
 },
 {
     id: 5,
-        text:/*level 5*/ ,
+        text: "As you approach the gate, a black robed mage appears in front of you. 'Weary traveler, 
+    you must answer my riddle if you wish to proceed.What being draws breath that consumes and grows, but that breath will never join the living ? '”,
     options: [
         {
-            text: /* the choice to the next advance or Game Over*/ ,
-            setState: {  : false, fire: true }
-
-        }
+            text: "Wind!",
+            requiredState: (currentState) => currentState. /* verifying we have said thing*/
+                setState: { Wind: false, fire: true }
+            nextText: 18
+        },
+{
+    text: "Take a moment to smoke your pipe, and contemplate your next ove?",
+        requiredState: (currentState) => currentState. /* verifying we have said thing*/
+            setState: { earth: false, fire: true }
+    nextText: 19
+},
+{
+    text: "Water!",
+        requiredState: (currentState) => currentState. /* verifying we have said thing*/
+            setState: { water: false, fire: true }
+    nextText: 20
+},
+{
+    text: "Fire?",
+        requiredState: (currentState) => currentState. /* verifying we have said thing*/
+            setState: { fire: true, wind: false }
+    nextText: 21
+},
     ]
 },
 {
