@@ -1,0 +1,15 @@
+.jumbotron {
+    margin: auto;
+    width: 50%;
+    border: 5px groove green;
+    padding: 20px;
+    text-align: center;
+
+}
+
+
+body {
+    background-image: url("../images/startgame.gif");
+    background-repeat:no-repeat ;
+    background-size: 100%;
+  }
