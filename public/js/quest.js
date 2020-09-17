@@ -154,7 +154,7 @@ const textNodes = [
     nextText: 16
 },
 {
-    text: "Take a moment to spoke your pipe, and contemplate your next ove?",
+    text: "Take a moment to smoke your pipe, and contemplate your next ove?",
         requiredState: (currentState) => currentState. /* verifying we have said thing*/
             setState: { pipe: false, magic: true }
     nextText: 17
@@ -183,4 +183,21 @@ const textNodes = [
     ]
 }
 ]
+var timeEnd;
+var timeLeft = 25;
+var time;
+function downloadTimer() {
+    timerEl.removeAttribute("hidden");
+    startScreen.setAttribute("style", "display: none");
+    quiz.setAttribute("style", "display: block !important");
+    time = setInterval(function () {
+        if (timeLeft <= 0) {
+            clearInterval(downloadTimer);
+            document.getElementById("timer").innerHTML = "Finished";
+        } else {
+            document.getElementById("timer").innerHTML = timeLeft + " seconds remaining";
+        }
+        timeLeft -= 1;
+    }, 1000);
+}
 startGame()
