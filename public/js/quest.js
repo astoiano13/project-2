@@ -16,7 +16,7 @@ function showTextNode(textNodeIndex) {
     while (optionsButtonElement.firstChild) {
         optionButtonsElement.removeChild(optionButtonsElement.firstChild)
     }
-    // add the questions that we need to
+    // add the questions that we need to loop
     textNode.options.forEach(option => {
         if (showOption(option)) {
             const button = doument.createElement('button')
@@ -31,7 +31,7 @@ function showTextNode(textNodeIndex) {
 function showOption(option) {
     return option.requireState == null || option.requiredState(state)
 }
-function selectOption(questions) {
+function selectOption(option) {
     const nextTextNodeId = option.nextText
     // where we restart the game
     if (nextTextNodeId <= 0) { }
@@ -44,91 +44,82 @@ function selectOption(questions) {
 const textNodes = [
     {
         id: 1,
-        text: "The ground just in front of your feet crumbles to unveil a bottomless pit."
-          options: [
+        text: "The ground just in front of your feet crumbles to unveil a bottomless pit.",
+        options: [
             {
                 text: 'Do you use Magic to summon a plank to cross?'
-                    setState: {/* whatever on hand: true*/ },
+                    setState: { Magic: true },
                 nextText: 2
             },
             {
                 text: 'Do you try to jump over the pit?'
                     setState: {/* whatever on hand: true*/ },
-                nextText: 3
+                nextText: 6
             },
             {
                 text: 'Do you climb the cracks in the wall to cross the pit?'
                     setState: {/* whatever on hand: true*/ },
-                nextText: 4
+                nextText: 6
             },
             {
                 text: 'Do you try to break off pieces of stone to make a bridge?'
                     setState: {/* whatever on hand: true*/ },
-                nextText: 5
+                nextText: 6
             },
         ]
     },
     {
         id: 2,
         text: "A goblin emerges from a different pathway! Before the goblin can acknowledge you, a stone 
-        golem emerges, fending off the goblin, Do you: ",
+            golem emerges, fending off the goblin, Do you: ",
         options: [
             {
                 text: "run down the path the goblin emerged from?",
-                requiredState: (currentState) => currentState. /* verifying we have said thing*/
-                    setState: { magic: true, fight false }
+                requiredState: (currentState) => currentState.Magic
+                    setState: { run: true }
+                nextText: 3
+            },
+            {
+                text: "begin fighting the goblin?",
                 nextText: 6
             },
-    {
-        text: "begin fighting the goblin?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { fight: false, magic: true }
-                nextText: 7
+            {
+                text: "try to reason with the goblin?",
+                nextText: 6
             },
-{
-    text: "try to reason with the goblin?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { reason: false, magic: true }
-    nextText: 8
-},
-{
-    text: "use magic to heal the golem?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { run: false, magic: true }
-    nextText: 9
-},
-]
+            {
+                text: "use magic to heal the golem?",
+                nextText: 6
+            },
+        ]
     },
-{
-    id: 3,
+    {
+        id: 3,
         text: "You encounter berries. The golem appears to be curious. You sense a warmth from
     the berries drawing you toward them.",
     options: [
-        {
-            text: "Do you eat the berries?",
-            requiredState: (currentState) => currentState. /* verifying we have said thing*/
-                setState: { berries: false, onward: true }
-                nextText: 10
+            {
+                text: "Do you eat the berries?",
+
+                nextText: 6
             },
-{
-    text: "Do you feed the golem berries?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { feed: false, onward: true }
-    nextText: 11
-},
-{
-    text: "Do you enchant the berries?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { enchant: false, onward: true }
-    nextText: 12
-},
-{
-    text: "Do you continue onward?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { onward: true, berries: false }
-    nextText: 13
-},
-        ]
+            {
+                text: "Do you feed the golem berries?",
+
+                nextText: 6
+            },
+            {
+                text: "Do you enchant the berries?",
+
+                nextText: 6
+            },
+            {
+                text: "Do you continue onward?",
+                requiredState: (currentState) => currentState. /* verifying we have said thing*/
+                    setState: { onward: continue}
+                    nextText: 4
+    },
+]
     },
 {
     id: 4,
@@ -137,27 +128,24 @@ const textNodes = [
     options: [
         {
             text: "Do you use magic to seal off the gate?"
-            requiredState: (currentState) => currentState. /* verifying we have said thing*/
-                setState: { charm: false, magic: true }
-            nextText: 14
+            
+            nextText: 6
         },
-{
-    text: "Do you fight your way through?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { fight: false, magic: true }
-    nextText: 15
-},
-{
-    text: "Cast a vision spell to lose the skeleton's attention?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { magic: true, charm: false }
-    nextText: 16
+        {
+            text: "Do you fight your way through?",
+
+            nextText: 6
+        },
+        {
+            text: "Cast a vision spell to lose the skeleton's attention?",
+            requiredState: (currentState) => currentState. /* verifying we have said thing*/
+                setState: { spell: true }
+    nextText: 5
 },
 {
     text: "Take a moment to smoke your pipe, and contemplate your next ove?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { pipe: false, magic: true }
-    nextText: 17
+
+        nextText: 6
 },
     ]
 },
@@ -168,33 +156,30 @@ const textNodes = [
     options: [
         {
             text: "Wind!",
-            requiredState: (currentState) => currentState. /* verifying we have said thing*/
-                setState: { Wind: false, fire: true }
-            nextText: 18
+
+            nextText: 6
         },
-{
-    text: "Beast?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { earth: false, fire: true }
-    nextText: 19
-},
-{
-    text: "Yourself!",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { water: false, fire: true }
-    nextText: 20
-},
-{
-    text: "Fire?",
-        requiredState: (currentState) => currentState. /* verifying we have said thing*/
-            setState: { fire: true, wind: false }
-    nextText: 21
+        {
+            text: "Beast?",
+
+            nextText: 6
+        },
+        {
+            text: "Yourself!",
+
+            nextText: 6
+        },
+        {
+            text: "Fire?",
+            requiredState: (currentState) => currentState. /* verifying we have said thing*/
+                setState: { fire: true }
+    nextText: 7
 },
      ]
     },
 {
-    id: 6, /* game over*/
-        text: /*text about end of game */
+    id: 6,
+        text: "You have chosen poorly, and thus your adventure comes to a grim end."
     options: [
         {
             text: "Restart",
@@ -202,22 +187,16 @@ const textNodes = [
         }
     ]
 }
-]
-var timeEnd;
-var timeLeft = 25;
-var time;
-function downloadTimer() {
-    timerEl.removeAttribute("hidden");
-    startScreen.setAttribute("style", "display: none");
-    quiz.setAttribute("style", "display: block !important");
-    time = setInterval(function () {
-        if (timeLeft <= 0) {
-            clearInterval(downloadTimer);
-            document.getElementById("timer").innerHTML = "Finished";
-        } else {
-            document.getElementById("timer").innerHTML = timeLeft + " seconds remaining";
+{
+    id: 7, /* winner*/
+        text: /*text about end of game */
+    options: [
+        {
+            text: "You win, do you want to play again?",
+
         }
-        timeLeft -= 1;
-    }, 1000);
+    ]
 }
+]
+
 startGame()
