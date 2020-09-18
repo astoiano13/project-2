@@ -1,0 +1,16 @@
+.jumbotron {
+    margin: auto;
+    width: 50%;
+    border: 5px groove green;
+    padding: 20px;
+    text-align: center;
+    margin-top: 5%;
+
+}
+
+
+body {
+    background-image: url("../images/victory.gif");
+    background-repeat:no-repeat ;
+    background-size: 100%;
+  }
