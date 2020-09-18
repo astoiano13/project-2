@@ -10,7 +10,8 @@
 
 
 body {
+    
     background-image: url("../images/victory.gif");
     background-repeat:no-repeat ;
-    background-size: 100%;
+    background-size: 100% 150%;
   }
