@@ -74,7 +74,7 @@ const textNodes = [
         golem emerges, fending off the goblin, Do you: ",
         options: [
             {
-                text: "use magic to heal the golem?",
+                text: "run down the path the goblin emerged from?",
                 requiredState: (currentState) => currentState. /* verifying we have said thing*/
                     setState: { magic: true, fight false }
                 nextText: 6
@@ -92,7 +92,7 @@ const textNodes = [
     nextText: 8
 },
 {
-    text: "run down the path the goblin emerged from?",
+    text: "use magic to heal the golem?",
         requiredState: (currentState) => currentState. /* verifying we have said thing*/
             setState: { run: false, magic: true }
     nextText: 9
@@ -136,7 +136,7 @@ const textNodes = [
     twice the number appear.",
     options: [
         {
-            text: "Do you ctry to charm the skeletons into thinking you are one of them?",
+            text: "Do you use magic to seal off the gate?"
             requiredState: (currentState) => currentState. /* verifying we have said thing*/
                 setState: { charm: false, magic: true }
             nextText: 14
@@ -148,7 +148,7 @@ const textNodes = [
     nextText: 15
 },
 {
-    text: "Do you use magic to seal off the gate?",
+    text: "Cast a vision spell to lose the skeleton's attention?",
         requiredState: (currentState) => currentState. /* verifying we have said thing*/
             setState: { magic: true, charm: false }
     nextText: 16
@@ -173,13 +173,13 @@ const textNodes = [
             nextText: 18
         },
 {
-    text: "Take a moment to smoke your pipe, and contemplate your next ove?",
+    text: "Beast?",
         requiredState: (currentState) => currentState. /* verifying we have said thing*/
             setState: { earth: false, fire: true }
     nextText: 19
 },
 {
-    text: "Water!",
+    text: "Yourself!",
         requiredState: (currentState) => currentState. /* verifying we have said thing*/
             setState: { water: false, fire: true }
     nextText: 20
@@ -190,8 +190,8 @@ const textNodes = [
             setState: { fire: true, wind: false }
     nextText: 21
 },
-    ]
-},
+     ]
+    },
 {
     id: 6, /* game over*/
         text: /*text about end of game */
