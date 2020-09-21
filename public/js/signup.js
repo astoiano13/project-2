@@ -2,14 +2,15 @@ $(document).ready(() => {
   // Getting references to our form and input
   const signUpForm = $("form.signup");
   const emailInput = $("input#email-input");
-  const passwordInput = $("input#password-input");
+  const charInput = $("#char-input")
+  // const passwordInput = $("input#password-input");
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", event => {
     event.preventDefault();
     const userData = {
       email: emailInput.val().trim(),
-
+      charClass: charInput.val().trim()
     };
 
     if (!userData.email || !userData.charClass) {
@@ -29,7 +30,7 @@ $(document).ready(() => {
       charClass: charClass
     })
       .then(() => {
-        window.location.replace("/members");
+        window.location.replace("/startgame");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
