@@ -1,17 +1,23 @@
 const textElement = document.getElementById('text');
 const optionButtonsElement = document.getElementById('choice-buttons');
-// what the charecture has on him/her
+const questionElement = document.getElementById('question')
+const nextButton = document.getElementById('next_btn')
+
 let state = {};
-const currentQuestion = 0;
 const startButton = document.getElementById('startbtn')
 
-startButton.addEventListener('click', startGame)
+startButton.addEventListener('click', startGame);
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion();
+})
 
 function startGame() {
     state = {};
     showTextNode(1);
     console.log("started")
-
+    setNextQuestion()
+    currentQuestionIndex = 0
 }
 
 function showTextNode(textNodeIndex) {
@@ -47,10 +53,22 @@ function selectOption(option) {
     showTextNode(nextNodeId);
 }
 
-function onClickChange() {
 
+function setNextQuestion() {
+    showQuestion(currentQuestionIndex);
 }
-
+function showQuestion(textNodes) {
+    questionElement.innerText = question.question;
+    question.answers.forEach(answer => {
+        const button = document.createElement('button')
+        button.innerText = answer.textbutton.classList.add('btn');
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener('click', selectAnswer);
+        answerButtonElement.appendChild(button);
+    })
+}
 // define variables in an object
 const textNodes = [
     {
@@ -202,5 +220,24 @@ const textNodes = [
         ],
     },
 ];
+let counter = 45;
+let score = 0;
+let timeEnd;
+let lost = 0;
+let timer;
+function downloadTimer() {
+    timerEl.removeAttribute("hidden");
+    startScreen.setAttribute("style", "display: none");
+    quiz.setAttribute("style", "display: block !important");
+    time = setInterval(function () {
+        if (timeLeft <= 0) {
+            clearInterval(downloadTimer);
+            document.getElementById("timer").innerHTML = "Finished";
+        } else {
+            document.getElementById("timer").innerHTML = timeLeft + " seconds remaining";
+        }
+        timeLeft -= 1;
+    }, 1000);
+}
 
 startGame();
