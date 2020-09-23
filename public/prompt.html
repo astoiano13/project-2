@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href = "../public/stylesheets/prompts.css" rel="stylesheet">
+    <link href="/stylesheets/prompts.css" rel="stylesheet" type="text/css">
     <title>Text Adventure</title>
 </head>
+
 <body style="background-image: url(images/maze.gif);background-repeat:no-repeat ;
 background-size: 100% 150%;">
     <div class="container">
-        <div id="text">You are in a labyrinth, you must get to the castle before the bustling festival reaches its close. 
-            You proceed along a narrow path and suddenly the ground just in front of your feet crumbles to unveil a bottomless pit. 
-            <br>
-            Do you:</div>
-        <div id="choice-buttons" class="btn-grid">
-            <button id="answer2" class="btn">Use Magic to summon a plank to cross</button>
-            <button id="answer3" class="btn">Try to jump over the pit</button>
-            <button id="answer4" class="btn">Climb the cracks in the wall to cross the pit</button>
-            <button id="answer5" class="btn">Try to break off pieces of stone to make a bridge</button>
-        </div>
+        <div id="text"></div>
+        <div id="choices" class="btn-grid"></div>
+        <h2 id='time'></h2>
     </div>
+    <script src="/js/prompt.js"></script>
 </body>
+
 </html>
