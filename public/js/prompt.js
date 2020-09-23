@@ -171,8 +171,8 @@ function init() {
         timeLeft--;
 
         if (timeLeft <= 0) {
-            clearInterval(timerId);
             alert('Time is up, you lose!');
+            resetGame();
         }
 
         timeElement.textContent = timeLeft;
@@ -181,7 +181,15 @@ function init() {
     renderCurrentText();
 }
 
-init();
+function resetGame() {
+    clearInterval(timerId);
+    postScore()
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            init();
+        });
+}
 
 function postScore() {
     const score = {
@@ -201,20 +209,19 @@ containerElement.addEventListener('click', event => {
     if (event.target.matches('button')) {
         const chosen = event.target;
         const chosenIndex = chosen.getAttribute('data-index');
-        const nextId = textNodes[currentTextIndex].options[chosenIndex].nextText;
+        const nextId =
+            textNodes[currentTextIndex].options[chosenIndex].nextText;
         currentTextIndex = textNodes.findIndex(tn => tn.id === nextId);
 
         if (currentTextIndex >= 0) {
             renderCurrentText();
         } else {
-            clearInterval(timerId);
-            postScore()
-                .then(() => {
-                    init();
-                });
+            resetGame();
         }
     }
 });
+
+init();
 
 // function returnstartGame() {
 //     showTextNode(1);
@@ -298,6 +305,3 @@ containerElement.addEventListener('click', event => {
 //     }, 1000);
 // }
 // downloadTimer();
-
-
-
