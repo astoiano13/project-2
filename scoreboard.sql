@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS game_score;  
+DROP DATABASE IF EXISTS score;  
 
-CREATE DATABASE game_score;
+CREATE DATABASE score;
 
-CREATE TABLE game_score (
+CREATE TABLE score (
     game_id int(10) PRIMARY KEY AUTO_INCREMENT,
     player_time NOT_NULL DEFAULT CURRENT_TIMESTAMP, 
 );
