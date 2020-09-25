@@ -153,6 +153,9 @@ let timerId;
 
 function renderCurrentText() {
     const textNode = textNodes[currentTextIndex];
+    if (textNode.options[0].nextText === -1) {
+        clearInterval(timerId)
+    }
     textElement.textContent = textNode.text;
 
     choicesElement.innerHTML = '';
@@ -216,10 +219,11 @@ function showScores(scorez) {
         newTable.appendChild(newRow)
     }
     textElement.appendChild(newTable);
-    const newButton = document.createElement('button').textContent = "restart"
-    newButton.onclick = init();
-    newButton.setAttribute('class', 'btn');
-    textElement.appendChild(newButton)
+    // const newButton = document.createElement('button');
+    // newButton.textContent = "restart"
+    // newButton.onclick = init();
+    // newButton.setAttribute('class', 'btn');
+    // textElement.appendChild(newButton)
 
 }
 function postScore() {
