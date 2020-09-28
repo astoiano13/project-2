@@ -15,6 +15,7 @@ module.exports = function (app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post('/api/signup', (req, res) => {
+    console.log(req.body)
     db.User.create({
       email: req.body.email,
       password: req.body.password,
@@ -52,26 +53,33 @@ module.exports = function (app) {
   app.get('/api/scores', (req, res) => {
     // query for scores
     // send back as json
+    db.Score.findAll({ include: [{ model: db.User, attributes: ["email"] }] })
+      .then(scores => {
+        console.log(scores);
+        res.json(scores)
+      }
+      )
   });
 
   app.post('/api/scores', (req, res) => {
     const score = req.body.value;
-    console.log(score);
+    console.log(score, req.user.id);
 
     // save score to db
     db.Score.create({
       UserId: req.user.id,
-      value: score
+      score: score
     }).then(createdScore => {
       res.json(createdScore)
     }).catch(err => {
       console.log(err);
+      res.sendStatus(500)
     });
 
     // then, send score to client in response
-    res.json({
-      userId: req.user.id,
-      score: score
-    });
+    // res.json({
+    //   userId: req.user.id,
+    //   score: score
+    // });
   })
 };

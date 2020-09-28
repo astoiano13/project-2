@@ -43,3 +43,6 @@ body {
 .btn:hover {
 border-color: greenyellow;
 }
+td{
+    text-align: center;
+}

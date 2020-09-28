@@ -1,3 +1,5 @@
+
+
 const containerElement = document.querySelector('.container');
 const textElement = document.getElementById('text');
 const choicesElement = document.getElementById('choices');
@@ -151,6 +153,9 @@ let timerId;
 
 function renderCurrentText() {
     const textNode = textNodes[currentTextIndex];
+    if (textNode.options[0].nextText === -1) {
+        clearInterval(timerId)
+    }
     textElement.textContent = textNode.text;
 
     choicesElement.innerHTML = '';
@@ -182,15 +187,45 @@ function init() {
 }
 
 function resetGame() {
+    console.log('made it here');
     clearInterval(timerId);
     postScore()
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            init();
+            // init();
+            getScores()
+                .then(response => response.json())
+                .then(scorez => {
+                    console.log(scorez);
+                    showScores(scorez);
+                    //init();
+                });
         });
 }
+function showScores(scorez) {
+    scorez.sort((a, b) => b.score - a.score)
+    const newTable = document.createElement('table');
+    newTable.style.width = "100%"
+    const firstRow = document.createElement('tr')
+    firstRow.innerHTML = '<th>Place </th><th>Name</th><th>Score</th>'
+    choicesElement.innerHTML = '';
+    newTable.appendChild(firstRow);
+    for (let i = 0; i < 10; i++) {
+        const current = scorez[i]
+        const user = current.User.email.split('@')[0]
+        const newRow = document.createElement('tr')
+        newRow.innerHTML = `<td>${i + 1}</td><td>${user}</td><td>${current.score}</td>`
+        newTable.appendChild(newRow)
+    }
+    textElement.appendChild(newTable);
+    // const newButton = document.createElement('button');
+    // newButton.textContent = "restart"
+    // newButton.onclick = init();
+    // newButton.setAttribute('class', 'btn');
+    // textElement.appendChild(newButton)
 
+}
 function postScore() {
     const score = {
         value: timeLeft,
@@ -204,7 +239,14 @@ function postScore() {
         body: JSON.stringify(score),
     });
 }
-
+function getScores() {
+    return fetch('/api/scores', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+}
 containerElement.addEventListener('click', event => {
     if (event.target.matches('button')) {
         const chosen = event.target;
