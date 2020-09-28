@@ -1,9 +1,11 @@
 module.exports = function (sequelize, DataTypes) {
-    const score = sequelize.define('score', {
-    score: {
-        type: DataTypes.int, 
-        unique: true, 
-        allowNull: false
-    }
-    }
-    )},
+    const Score = sequelize.define('score', {
+        score: {
+            type: DataTypes.INTEGER,
+            unique: true,
+            allowNull: false,
+        },
+    });
+
+    return Score;
+};
